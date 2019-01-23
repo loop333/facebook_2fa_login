@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!./run.sh fb_suggestions.py
 # -*- coding: utf-8 -*-
 
 from selenium import webdriver
@@ -16,7 +16,7 @@ totp_secret = 'secret'
 
 pymk = []
 try:
-    with open('pymk.txt', 'r') as fin:
+    with open('fb_suggestions.txt', 'r') as fin:
         for line in fin:
             id = line.split(',')[0]
             pymk.append(id)
@@ -101,11 +101,11 @@ while True:
        driver.title == 'Найти друзей':
         driver.execute_script('window.scrollBy(0, 10000);')
         time.sleep(5)
-        with open('suggestions.html', 'w') as fout:
+        with open('fb_suggestions.html', 'w') as fout:
             fout.write(driver.page_source)
         friends_table = driver.find_element_by_id('friends_center_main')
         friends = friends_table.find_elements_by_xpath('./div/div')
-        with open('pymk.txt', 'a') as fout:
+        with open('fb_suggestions.txt', 'a') as fout:
             for friend in friends:
                 id = friend.get_attribute('data-pymk-id')
                 name = friend.find_element_by_xpath('./div/div/*/a').get_property('text')
@@ -116,7 +116,7 @@ while True:
 
     print('Unknown page url: ' + driver.current_url)
     print('Unknown page title: ' + driver.title)
-    with open('src.html', 'w') as fout:
+    with open('fb_src.html', 'w') as fout:
         fout.write(driver.page_source)
     view_page(driver)
     break
