@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!./run.sh vk_suggestions.py
 # -*- coding: utf-8 -*-
 
 from selenium import webdriver
@@ -16,7 +16,7 @@ password = 'password'
 
 vk = []
 try:
-    with open('vk.txt', 'r') as fin:
+    with open('vk_suggestions.txt', 'r') as fin:
         for line in fin:
             id = line.split(',')[0]
             vk.append(id)
@@ -82,7 +82,7 @@ while True:
         with open('vk_suggestions.html', 'w') as fout:
             fout.write(driver.page_source)
         friends = driver.find_elements_by_class_name('Friends__item')
-        with open('vk.txt', 'a') as fout:
+        with open('vk_suggestions.txt', 'a') as fout:
             for friend in friends:
 #                print(friend.get_property('innerHTML'))
                 e = friend.find_element_by_class_name('Friends__itemName')
@@ -95,7 +95,7 @@ while True:
 
     print('Unknown page url: ' + driver.current_url)
     print('Unknown page title: ' + driver.title)
-    with open('src_vk.html', 'w') as fout:
+    with open('vk_src.html', 'w') as fout:
         fout.write(driver.page_source)
     view_page(driver)
     break
