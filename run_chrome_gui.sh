@@ -1,0 +1,1 @@
+docker run -it --rm --name selenuim -e DISPLAY=192.168.1.2:0 -v /tmp/.X11-unix:/tmp/.X11-unix -v "$PWD":/usr/src/myapp -w /usr/src/myapp <your_name>/selenium /usr/bin/google-chrome --no-sandbox --disable-gpu --no-first-run --user-data-dir=/usr/src/myapp/profile $1
