@@ -104,7 +104,7 @@ while True:
         with open('fb_suggestions.html', 'w') as fout:
             fout.write(driver.page_source)
         friends_table = driver.find_element_by_id('friends_center_main')
-        friends = friends_table.find_elements_by_xpath('./div/div')
+        friends = friends_table.find_elements_by_xpath('./div/div[@data-pymk-id]')
         with open('fb_suggestions.txt', 'a') as fout:
             for friend in friends:
                 id = friend.get_attribute('data-pymk-id')
