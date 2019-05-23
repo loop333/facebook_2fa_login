@@ -99,13 +99,17 @@ while True:
 
     if driver.current_url.startswith('https://m.facebook.com/friends/center/suggestions/') and \
        driver.title == 'Найти друзей':
+        n = 0
         while True:
             try:
                 more = driver.find_element_by_class_name('centeredIndicator')
             except:
                 break
             driver.execute_script('window.scrollBy(0, 10000);')
-            WebDriverWait(driver, 10).until(ec.staleness_of(more))        
+            WebDriverWait(driver, 10).until(ec.staleness_of(more))
+            n = n + 1
+            if n > 20:
+                break
         with open('fb_suggestions.html', 'w') as fout:
             fout.write(driver.page_source)
         friends_table = driver.find_element_by_id('friends_center_main')
