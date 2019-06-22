@@ -117,7 +117,9 @@ while True:
         with open('fb_suggestions.txt', 'a') as fout:
             for friend in friends:
                 id = friend.get_attribute('data-pymk-id')
-                name = friend.find_element_by_xpath('./div/div/*/a').get_property('text')
+#                name = friend.find_element_by_xpath('./div/div/*/a').get_property('text')
+                name = friend.find_element_by_xpath('./div/a/i[@aria-label]').get_attribute('aria-label')
+
                 if id not in pymk:
                     print(id, name)
                     fout.write(id + ', ' + name + '\n')
